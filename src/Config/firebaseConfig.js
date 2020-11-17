@@ -14,7 +14,7 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 const firebaseApp = firebase.initializeApp(firebaseConfig);
-firebaseApp.firestore();
+export const database = firebaseApp.firestore();
 const reduxSagaFirebase = new ReduxSagaFirebase(firebaseApp)
 
 export default reduxSagaFirebase;

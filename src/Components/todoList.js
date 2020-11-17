@@ -10,7 +10,7 @@ const TodoList = () => {
 
   useEffect(() => {
     dispatch( { type: GETTODOS})
-  })
+  }, [])
   
   const filteredTodos = useSelector(selectFilteredTodos)
 
