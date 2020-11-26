@@ -2,29 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Reducer from './Store/reducer';
 import reportWebVitals from './reportWebVitals';
 
-import {Provider} from 'react-redux';
-import {createStore, applyMiddleware, compose} from 'redux';
-import createSagaMiddleware from 'redux-saga'
-import rootSaga from './Saga/sagas';
-
-const sagaMiddleware = createSagaMiddleware();
-
-const store = createStore(
-  Reducer,
-  compose(
-    applyMiddleware(sagaMiddleware)
-  )
-);
-
-sagaMiddleware.run(rootSaga);
-
 ReactDOM.render(
-  <Provider store={store}>
+  <React.StrictMode>
     <App />
-  </Provider>,
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

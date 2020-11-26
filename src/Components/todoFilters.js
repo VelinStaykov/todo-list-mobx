@@ -1,10 +1,8 @@
-import { StatusFilters } from '../Store/filtersReducer'
-import { FILTERCHANGE } from '../Store/actions';
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react';
+import { observer } from 'mobx-react'
+import { StatusFilters } from '../Store/todosModel'
 
-const TodoFilters = (props) => {
-
-    const dispatch = useDispatch();
+const TodoFilters = observer((props) => {
 
     const StatusFilter = ({ value: status, onChange }) => {
         const renderedFilters = Object.keys(StatusFilters).map((key) => {
@@ -29,10 +27,10 @@ const TodoFilters = (props) => {
         )
     }
 
-    const { status } = useSelector((state) => state.filters)
+    const {status} = props.filter;
 
     const onStatusChange = (status) => {
-        dispatch({ type: FILTERCHANGE, payload: status }) 
+        props.updateFilter(status)
     }
 
     return (
@@ -40,6 +38,6 @@ const TodoFilters = (props) => {
             <StatusFilter value={status} onChange={onStatusChange} />
         </footer>
     )
-}
+})
 
 export default TodoFilters

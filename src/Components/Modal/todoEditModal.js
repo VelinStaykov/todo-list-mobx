@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const TodoEditModal = (props) => {
     const [visible, setVisibility] = useState(false);
-    const [todoName, setTodoName] = useState(props.text);
+    const [todoName, setTodoName] = useState(props.todo.text);
     const [error, setErrorVisibility] = useState(false)
 
     const handleClose = () => setVisibility(false);
     const handleShow = () => {
         setVisibility(true);
         setErrorVisibility(false);
-        setTodoName(props.text);
+        setTodoName(props.todo.text);
     }
 
     const editName = () => {
@@ -18,7 +18,8 @@ const TodoEditModal = (props) => {
             return;
         }
 
-        props.changeText(todoName);
+        props.editTodo(props.todo.id, todoName)
+        
         handleClose();
         setErrorVisibility(false);
     }

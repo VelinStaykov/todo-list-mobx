@@ -1,24 +1,19 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { GETTODOS } from '../Store/actions';
-import { selectFilteredTodos } from '../Store/todosReducer'
-import Todo from './todo'
+import React, { useEffect } from "react";
+import Todo from "./todo";
+import { observer } from "mobx-react";
 
-const TodoList = () => {
-
-  const dispatch = useDispatch();
+const TodoList = observer(({store}) => {
 
   useEffect(() => {
-    dispatch( { type: GETTODOS})
-  }, [])
+    store.setTodos()
+  }, [store])
   
-  const filteredTodos = useSelector(selectFilteredTodos)
+  const filteredTodos = store.filteredTodos;
 
   const renderedListItems = filteredTodos.map(todo => 
-      <Todo key={todo.id} todo={todo} />
+      <Todo key={todo.id} todo={todo} removeTodo={store.removeTodo} toggleTodo={store.toggleTodo} editTodo={store.editTodo} />
   )
 
-  return <ul className="todo-list">{renderedListItems}</ul>
-}
-
-export default TodoList
+  return <ul className="todo-list">{renderedListItems}</ul>;
+});
+export default TodoList;
